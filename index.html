@@ -308,8 +308,9 @@
 /* =====================================================
    Constants & storage
 ===================================================== */
-const TEXT_MODEL  = 'gemini-2.0-flash';
-const IMAGE_MODEL = 'gemini-2.5-flash-image';
+const APP_VERSION = 'v3';
+const TEXT_MODELS  = ['gemini-2.5-flash', 'gemini-2.0-flash', 'gemini-flash-latest'];
+const IMAGE_MODELS = ['gemini-2.5-flash-image', 'gemini-2.5-flash-image-preview'];
 const API_BASE    = 'https://generativelanguage.googleapis.com/v1beta/models/';
 
 const LS = {
@@ -343,20 +344,34 @@ const esc = s => String(s ?? '')
 /* =====================================================
    Gemini API helpers
 ===================================================== */
-async function geminiText(prompt, asJson = true){
-  const res = await fetch(API_BASE + TEXT_MODEL + ':generateContent', {
-    method:'POST',
-    headers:{ 'Content-Type':'application/json', 'x-goog-api-key': store.apiKey },
-    body: JSON.stringify({
-      contents:[{ parts:[{ text: prompt }] }],
-      generationConfig: asJson ? { responseMimeType:'application/json' } : {},
-    }),
-  });
-  if(!res.ok){
-    const body = await res.text().catch(()=> '');
-    throw new Error('API ' + res.status + (body ? ': ' + body.slice(0,180) : ''));
+// Tries each candidate model in order; remembers the first one that works.
+let workingTextModel = null;
+let workingImageModel = null;
+
+async function callGemini(models, remembered, body){
+  const candidates = remembered ? [remembered, ...models.filter(m => m !== remembered)] : models;
+  let lastErr = null;
+  for(const model of candidates){
+    const res = await fetch(API_BASE + model + ':generateContent', {
+      method:'POST',
+      headers:{ 'Content-Type':'application/json', 'x-goog-api-key': store.apiKey },
+      body: JSON.stringify(body),
+    });
+    if(res.ok) return { model, data: await res.json() };
+    const text = await res.text().catch(()=> '');
+    lastErr = new Error('API ' + res.status + ' (' + model + ')' + (text ? ': ' + text.slice(0,160) : ''));
+    // 404 = model name not available for this key → try the next candidate
+    if(res.status !== 404) throw lastErr;
   }
-  const data = await res.json();
+  throw lastErr;
+}
+
+async function geminiText(prompt, asJson = true){
+  const { model, data } = await callGemini(TEXT_MODELS, workingTextModel, {
+    contents:[{ parts:[{ text: prompt }] }],
+    generationConfig: asJson ? { responseMimeType:'application/json' } : {},
+  });
+  workingTextModel = model;
   const text = (data.candidates?.[0]?.content?.parts || [])
     .map(p => p.text || '').join('').trim();
   if(!text) throw new Error('Empty response from model');
@@ -367,19 +382,11 @@ async function geminiText(prompt, asJson = true){
 }
 
 async function geminiImage(prompt){
-  const res = await fetch(API_BASE + IMAGE_MODEL + ':generateContent', {
-    method:'POST',
-    headers:{ 'Content-Type':'application/json', 'x-goog-api-key': store.apiKey },
-    body: JSON.stringify({
-      contents:[{ parts:[{ text: prompt }] }],
-      generationConfig:{ responseModalities:['TEXT','IMAGE'] },
-    }),
+  const { model, data } = await callGemini(IMAGE_MODELS, workingImageModel, {
+    contents:[{ parts:[{ text: prompt }] }],
+    generationConfig:{ responseModalities:['TEXT','IMAGE'] },
   });
-  if(!res.ok){
-    const body = await res.text().catch(()=> '');
-    throw new Error('API ' + res.status + (body ? ': ' + body.slice(0,180) : ''));
-  }
-  const data = await res.json();
+  workingImageModel = model;
   const part = (data.candidates?.[0]?.content?.parts || []).find(p => p.inlineData);
   if(!part) throw new Error('No image returned');
   return 'data:' + (part.inlineData.mimeType || 'image/png') + ';base64,' + part.inlineData.data;
@@ -449,9 +456,8 @@ const topbarRight = document.getElementById('topbarRight');
 function renderTopbar(){
   const lv = store.level;
   topbar.style.display = 'flex';
-  topbarRight.innerHTML = lv
-    ? `<span class="badge ${lv}">&#9733; ${lv}</span>`
-    : '';
+  topbarRight.innerHTML = `<span class="faint" style="margin-right:4px">${APP_VERSION}</span>` +
+    (lv ? `<span class="badge ${lv}">&#9733; ${lv}</span>` : '');
 }
 
 /* =====================================================
