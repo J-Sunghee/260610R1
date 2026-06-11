@@ -1,0 +1,153 @@
+# Peer Review Report — APJE
+
+**Manuscript**: Turning AI Hallucinations into Learning Opportunities with a Toulmin Checklist for Argumentative Writing
+**Target Journal**: Asia Pacific Journal of Education (APJE)
+**Review Date**: 2026-04-28
+
+---
+
+## Summary of the Manuscript
+
+This manuscript presents a quasi-experimental study (N = 55) conducted at a South Korean university, examining whether a Toulmin-based AI hallucination checklist improves undergraduate students' argumentative writing quality when using ChatGPT. The authors reconceptualize AI hallucinations not as technical defects but as pedagogical opportunities for fostering critical verification and epistemic vigilance. Two intact class sections were assigned to checklist (experimental) and control conditions across two successive argumentative writing tasks, with pre-existing individual differences (AI attitudes, prior AI experience, critical thinking, writing self-efficacy) statistically controlled via repeated-measures GLMs. Results indicate that checklist users produced structurally richer and higher-quality essays than controls, while prompt quantity and length showed no significant group differences.
+
+---
+
+## Overall Recommendation
+
+**Major Revision**
+
+The manuscript addresses a timely and intellectually compelling topic and the empirical core is reasonably executed. However, the manuscript has a critical structural weakness in its fit for APJE: the Asia-Pacific regional framing is thin and appears largely incidental rather than constitutive of the theoretical and practical argument. Beyond this, there are substantive concerns regarding methodological transparency (the absence of explicit IRB approval documentation), analytical limitations (multicollinearity checks, assumption reporting), erroneous confidence interval reporting in Table 6, and a Discussion that occasionally over-reaches the data. These issues are addressable through revision and the work is worth investing in, but substantive rewriting is required before this manuscript is suitable for publication in APJE.
+
+---
+
+## Scoring Summary
+
+| 차원 | 점수(1-5) | 핵심 코멘트 |
+|------|-----------|-------------|
+| A. Aims & Scope 적합성 | 2 | 연구 자체는 흥미롭지만 아시아·태평양 맥락과의 연결이 표층적; 한국의 교육 정책·문화적 맥락 논의 부재 |
+| B. Significance & Originality | 4 | AI 환각을 교육적 기회로 재개념화하는 프레임이 참신함; Toulmin+checklist+AI의 결합은 비교적 새로운 기여 |
+| C. Theoretical Grounding | 3 | 인식론적 감시·비계 이론·이중처리 이론을 통합하나 이론 연계가 후행적; 서구 이론과 아시아 맥락의 긴장 미다룸 |
+| D. Methodological Rigor | 3 | IRB 정보 불명확; 통계 가정 점검 미보고; 왜도 처리 미언급; 평가자 간 신뢰도 미보고 |
+| E. Quality of Findings | 3 | Hedges' g 보고는 강점이나 Table 6 CI 오류; GLM 결과에 CI 없음; 학생 응답 질적 사례 부재 |
+| F. Discussion & Implications | 3 | 공변량 비유의 결과 과대해석; 한국/AP 정책적 시사점 미구체적; 비교문화적 이전가능성 논의 미흡 |
+| G. Writing Quality | 3 | 전반적으로 유창하나 오탈자·비문·중복 단락; APA 위반(DOI 오류, 표 캡션 포맷, Word 필드 코드 노출) |
+
+---
+
+## Critical Concern: APJE Fit
+
+**Score: 2/5 — 가장 시급한 수정 과제**
+
+APJE는 아시아·태평양 지역 교육에 초점을 두며, "즉각적 맥락을 넘어서는 통찰·개념·프레임워크를 생성하는 논문"을 우선시한다. 이 원고는 한국 한 대학교의 교양 강좌를 배경으로 하나, 본문 전체에서 이 지역적 맥락을 실질적으로 활용하지 않는다. 구체적 문제는 다음과 같다.
+
+1. **한국 AI 교육 정책·거버넌스 맥락 부재.** 한국은 AI 교육 정책의 글로벌 선도국(교육부 AI 디지털 교과서 정책, AI 리터러시 교육과정 등)이다. 원고는 이 정책 환경을 전혀 인용·맥락화하지 않는다. APJE 독자에게 이는 가장 자연스러운 연결 고리일 것이다.
+
+2. **아시아·태평양 고등교육 맥락의 특수성 미논의.** 연구 참여자(1학년 위주, 한국 교양 강좌)는 유교적 교육 전통, 위계적 교수-학생 관계, 암기 학습 관행 등 문화적으로 특수한 맥락을 가진다. 이 특성이 AI 비계 활용에 미치는 영향이 전혀 논의되지 않는다.
+
+3. **한국이라는 맥락이 우연적 배경에 그침.** "a university in South Korea" 한 문구 외에 원고는 어떤 서구 고등교육 맥락에서도 동일하게 쓰일 수 있다. 논의에서 아시아·태평양 학자는 한 명도 인용되지 않으며, 중국·일본·싱가포르·호주의 AI 쓰기 연구와 비교도 없다.
+
+4. **이전가능성 주장이 논거 없이 단언됨.** 결론에서 "AI 통합 쓰기 교육에 시사점이 있다"고 하지만, 한국 맥락이 어떻게 일반화를 강화하거나 제한하는지 설명이 없다.
+
+**수정 방향:** 서론에서 한국 고등교육·AI 정책 환경을 맥락화하고, 논의에서 중국·싱가포르·대만 등의 AI 보조 쓰기 연구와 명시적으로 비교하며, 유교적 교육 맥락이 이 비계 개입의 작동 기제에 어떤 독특한 조건을 형성하는지 이론화해야 한다.
+
+---
+
+## Major Comments (필수 수정사항)
+
+**1. IRB 및 윤리 승인 정보 불충분**
+
+"본 연구는 교육연구를 위한 기관 지침에 따라 수행되었다. 참여는 자발적이었으며 모든 데이터는 익명으로 수집되었다"는 기술만으로는 APJE 요건을 충족하지 못한다. 반드시 명시해야 할 사항: (a) IRB 또는 기관 연구윤리위원회 명칭, (b) 승인 번호, (c) 승인일, (d) 사전 동의 절차. 만약 기관 정책상 공식 IRB 심의 면제였다면 그 근거와 판단 기준을 명시해야 한다. 필수 교양 강좌에 재학 중인 1학년생이 다수인 권력 관계 맥락에서 자발적 참여와 비강압성 보장 절차도 기술되어야 한다.
+
+**2. 아시아·태평양 맥락화를 실질적으로 확장해야 함**
+
+위 Critical Concern에 상술한 대로, 서론과 논의를 대폭 재작성하여 연구를 아시아·태평양 교육 맥락에 실질적으로 위치시켜야 한다. 한국 AI 교육 정책 인용, 아시아·태평양 AI 보조 쓰기 비교 문헌 통합, 동아시아 교육 맥락이 개입 기제 및 참여자의 기저 성향에 미치는 영향에 대한 이론화를 요구한다.
+
+**3. 통계적 가정 검증 보고 부재**
+
+다음이 보고되어 있지 않다: (a) t-검정 전 분산 동질성 Levene 검정 결과 — Table 6에 일부 행은 Welch 보정 분수 df(38.04, 25.12)가 적용되고 일부는 df=53으로 일관되지 않는데 이에 대한 설명이 없다; (b) 반복측정 GLM 잔차의 정규성 검정 — Table 5에서 여러 변수의 심각한 왜도·첨도가 관찰됨(프롬프트 수 1차 실험집단: 왜도=3.45, 첨도=14.28; 프롬프트 길이: 왜도=4.03, 첨도=17.43); (c) Table 7 회귀 모델의 다중공선성 진단(VIF 또는 공차).
+
+**4. 체크리스트 도구 타당성 근거 불충분**
+
+핵심 실험 처치를 구성하는 새로운 도구에 대해 내용 타당도 계수(CVI 등)나 평가자 간 일치도 통계, 학생 사용성 파일럿 데이터가 제시되어 있지 않다. 저자들은 충분한 심리측정 근거를 제공하거나 이를 구체적 해석적 함의가 있는 제한점으로 명시해야 한다.
+
+**5. 에세이 루브릭 평가자 간 신뢰도 보고 필수**
+
+합의 이전의 평가자 간 신뢰도 통계(Cohen의 kappa 또는 ICC with 95% CI)를 보고하지 않는다. 세 가지 연구문제 모두에서 핵심 결과 변수인 에세이 질에 대해 이는 부적절하다.
+
+**6. 이론적 틀이 구성적이 아니라 소급적으로 제시됨**
+
+세 이론적 렌즈(인식론적 감시, 인지부하 이론, 이중처리 이론)가 주로 논의 섹션에서 도입된다. 이 프레임워크들은 문헌 검토/이론적 틀 섹션에서 명시적으로 도입되어 연구문제에 연결되는 구체적이고 검증 가능한 예측을 생성하는 데 사용되어야 한다.
+
+**7. Table 6의 신뢰구간 보고 오류 수정 필수**
+
+Table 6에서 Hedges' g에 대한 95% CI가 비유의 변수 행에서 내적으로 일관되지 않으며 효과크기 신뢰구간이 아닌 평균차이 값으로 보인다.
+- 프롬프트 수, 1차: Hedges' g = "4.66 [-1.52, 3.47]" — CI 하한이 상한보다 큰 것은 수학적으로 불가능.
+- 프롬프트 길이, 1차: "2068.20 [-486.48, 1996.13]" — 이 값들은 명백히 문자 단위이지 표준화 효과크기 단위가 아님.
+Table 6 전체에서 수정하고 명확히 해야 한다.
+
+---
+
+## Minor Comments
+
+1. **초록 단어 수**: APJE의 150-250 단어 제한 확인 필요. 아시아·태평양 맥락을 포함하면서 제한 내로 수정하라.
+2. **중복 단락**: "Factors influencing AI-supported writing" 하위절의 마무리 단락이 바로 앞 단락과 거의 동일하다. 하나를 삭제해야 한다.
+3. **오탈자**: "shile any direct effect on performance" → "while any direct effect on performance". 전체적인 교정이 필요하다.
+4. **Table 6 Welch 보정 불일치**: df=53인 행과 분수 df 행이 혼재하는데 선택 기준이 명시되어 있지 않다. Levene 검정 유의성 등 Welch 보정 적용 근거를 명시해야 한다.
+5. **SPSS 버전**: SPSS 21.0(2012년 출시)은 상당히 구버전이다. 모든 분석 절차가 해당 버전에서 정확하게 구현되었음을 확인해야 한다.
+6. **표 캡션 형식**: Table 1 캡션에 Word 필드 코드 "SEQ Table \* ARABIC 1"이 노출되어 있다. 모든 표 캡션을 APJE 스타일로 수정해야 한다.
+7. **참고문헌 형식 오류**: Yang (2022) DOI 세미콜론 오류, Hardik (2023) 비학술 출처 대체, arXiv preprint 명시.
+8. **Figure 1**: 최소 300 dpi 해상도로 축 레이블, 척도, 범례가 명확해야 한다.
+9. **키워드-제목 중복**: "argumentative writing"과 "AI hallucinations"이 제목과 키워드 모두에 등장. 이론 특정적 용어(예: "epistemic vigilance", "generative AI literacy")로 대체하라.
+10. **단일 문항 사전 경험 측정**: AI 사전 경험을 단일 Likert 문항으로 측정한 것은 심리측정적으로 취약하다. 이를 제한점으로 명시해야 한다.
+
+---
+
+## Specific Comments by Section
+
+### Abstract
+목적·방법·발견을 충분히 커버하나, APJE 관점의 두 가지 결정적 누락: (1) 아시아·태평양 맥락이 전혀 언급되지 않음; (2) 실천적·정책적 시사점 진술 없음. 지역 맥락을 전면에 두고 이전가능성 진술로 마무리하도록 수정해야 한다.
+
+### Introduction
+연구 공백을 신빙성 있게 설정하나 지역적 특수성 없는 일반적 고등교육 문헌 검토처럼 읽힌다. AI 보조 쓰기 도전 과제 논의에서 아시아·태평양 출처가 인용되지 않는다. RQ2의 "상호작용"과 "활용 패턴"의 개념적 구분을 명확히 해야 한다.
+
+### Literature Review
+원고에서 가장 강한 섹션. Table 1(환각 유형 분류)과 Table 2(체크리스트 프레임워크)는 논문의 가장 독창적이고 실용적인 기여다. 우려 사항: (1) 세 이론적 렌즈가 구체적 예측 도출에 사용되지 않음; (2) 중복 단락 삭제 필요; (3) 쓰기 교육 연구가 전적으로 북미·유럽 출처에 의존함 — 한국·대만·중국 EFL/EMI 맥락의 아시아·태평양 연구를 포함해야 한다.
+
+### Methods
+강점: G*Power 표본 크기 정당화 적절; 2단계 쓰기 절차 명확; 4개 공변량을 포함한 반복측정 GLM은 타당한 분석 선택. 추가 우려: (a) 처치 순응도 확인 없음 — 실험집단 참여자가 실제로 체크리스트를 사용했다는 근거가 없다; (b) 주제 선정 근거나 난이도 동등성 정보 없음; (c) 루브릭 평가자의 집단 무맹 처리 여부 미기술.
+
+### Results
+RQ별 논리적 구조화와 전반적 효과크기 보고는 칭찬할 만하다. AI 출력 구조에 대한 대형 효과크기(Hedges' g > 1.2)는 천장 효과 논의를 요한다(체크리스트 집단 2차 M = 5.72/7점 척도). Table 6 CI 오류 수정 필수. Table 5에서 관찰된 극단적 왜도는 분석적으로 미다루어짐.
+
+### Discussion
+논의는 사려 깊게 구성되었으며 비유의 집단×시간 상호작용 해석은 지적으로 정직하다. 우려 사항: (a) N=55에서의 영가설 결과를 부재의 증거로 과잉해석한 추론 축약 필요; (b) 논의 전체에서 아시아·태평양 비교 근거가 전무하다; (c) 세 이론적 기제가 사후 설명으로 제공됨.
+
+### Conclusion
+환각을 "탐구와 비판적 성찰의 촉발제"로 규정하는 것은 논문의 개념적 정점이며 인상적이다. 부재 항목: (a) 한국 또는 아시아·태평양 고등교육 행정가·교육과정 설계자를 위한 구체적 정책 시사점; (b) 기관 차원의 채택 가능성; (c) 아시아·태평양 맥락 전반에 걸친 비교 연구 촉구.
+
+---
+
+## Strengths
+
+1. **시의성 있는 참신한 재개념화**: AI 환각을 교육적 기회로 재구성하는 것은 지적으로 독창적이며 AI 통합 실천에 실질적 영향력을 가질 수 있다.
+2. **해당 분야 기준 이상의 방법론적 엄밀성**: 사전검사 통제를 포함한 유사실험 설계, 4개 공변량을 포함한 반복측정 GLM, 전반적 효과크기 보고는 현행 AI 교육 문헌의 방법론적 기준을 상회한다.
+3. **Table 2 — 체크리스트 프레임워크**: Toulmin 구성 요소와 환각 유형 및 검증 프롬프트를 체계적으로 정렬한 것은 논문에서 가장 실용적 가치가 높은 기여로서 교육자가 즉시 활용 가능하다.
+4. **비유의 결과에 대한 정직한 처리**: 비유의 집단×시간 상호작용과 비유의 공변량 효과를 최소화하지 않고 솔직하게 보고·해석한 것은 학술적 성실성을 반영한다.
+5. **효과크기 보고**: Hedges' g와 편 η²의 일관된 사용(Table 6 오류 수정 후)은 메타분석적 종합을 가능하게 하며 현재 모범 관행을 반영한다.
+
+---
+
+## Questions to Authors
+
+1. **IRB**: 기관 연구윤리위원회의 정식 명칭, 승인 번호, 승인일을 제공하라.
+2. **평가자 맹검**: 두 루브릭 평가자가 참여자의 집단 배정에 대해 맹검 처리되었는가?
+3. **체크리스트 순응도**: 실험집단 참여자가 실제로 쓰기 중 체크리스트를 사용했다는 근거는 무엇인가?
+4. **한국 AI 교육 정책 맥락**: 국가 AI 교육 정책 맥락이 참여자의 AI 도구 사전 친숙도나 AI 보조 쓰기에 대한 성향을 형성했는가?
+5. **AI 활용 루브릭 변별 타당도**: AI 활용 루브릭과 에세이 질 루브릭 사이의 변별 타당도를 확보하기 위해 어떤 조치를 취했는가?
+6. **Table 6 CI 명확화**: Table 6의 95% CI 값이 Hedges' g에 대한 신뢰구간인지 원시 평균차이인지 명확히 하라.
+7. **생성형 AI 사용 공개**: 원고 작성, 번역, 데이터 분석, 편집 과정에서 AI 도구를 사용했는가? APJE 요건에 따라 공개 진술이 필요하다.
+
+---
+
+*APJE Double-Anonymized Peer Review 프로토콜에 따라 심사함.*
+*평가 기준: APJE 심사 차원 A-G (APJE Research Article Guidelines, 2026).*
