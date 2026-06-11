@@ -151,18 +151,6 @@
   .example-row .txt{flex:1}
   .divider{height:1px;background:var(--border);margin:24px 0}
 
-  /* ---------- image ---------- */
-  .img-box{
-    border-radius:var(--radius-sm);overflow:hidden;background:var(--bg);
-    min-height:200px;display:flex;align-items:center;justify-content:center;
-    flex-direction:column;gap:12px;text-align:center;padding:0;
-  }
-  .img-box img{width:100%;display:block}
-  .img-caption{
-    font-size:.88rem;color:var(--text-sub);font-style:italic;
-    text-align:center;margin-top:10px;
-  }
-
   /* ---------- quiz / test options ---------- */
   .option{
     display:flex;align-items:center;gap:12px;width:100%;text-align:left;
@@ -308,9 +296,8 @@
 /* =====================================================
    Constants & storage
 ===================================================== */
-const APP_VERSION = 'v3';
+const APP_VERSION = 'v4';
 const TEXT_MODELS  = ['gemini-2.5-flash', 'gemini-2.0-flash', 'gemini-flash-latest'];
-const IMAGE_MODELS = ['gemini-2.5-flash-image', 'gemini-2.5-flash-image-preview'];
 const API_BASE    = 'https://generativelanguage.googleapis.com/v1beta/models/';
 
 const LS = {
@@ -346,7 +333,6 @@ const esc = s => String(s ?? '')
 ===================================================== */
 // Tries each candidate model in order; remembers the first one that works.
 let workingTextModel = null;
-let workingImageModel = null;
 
 async function callGemini(models, remembered, body){
   const candidates = remembered ? [remembered, ...models.filter(m => m !== remembered)] : models;
@@ -379,17 +365,6 @@ async function geminiText(prompt, asJson = true){
   // strip possible code fences before parsing
   const clean = text.replace(/^```(?:json)?\s*/i,'').replace(/```\s*$/,'');
   return JSON.parse(clean);
-}
-
-async function geminiImage(prompt){
-  const { model, data } = await callGemini(IMAGE_MODELS, workingImageModel, {
-    contents:[{ parts:[{ text: prompt }] }],
-    generationConfig:{ responseModalities:['TEXT','IMAGE'] },
-  });
-  workingImageModel = model;
-  const part = (data.candidates?.[0]?.content?.parts || []).find(p => p.inlineData);
-  if(!part) throw new Error('No image returned');
-  return 'data:' + (part.inlineData.mimeType || 'image/png') + ';base64,' + part.inlineData.data;
 }
 
 /* =====================================================
@@ -446,7 +421,6 @@ const scoreToLevel = score => LEVELS[Math.max(0, Math.min(5, score - 1))];
 const state = {
   test:    { idx:0, score:0 },
   session: null,   // { expressions:[...], quiz:[...], idx, quizIdx, quizScore, answers:[] }
-  imageCache: {},  // expression -> dataURL
 };
 
 const view = document.getElementById('view');
@@ -706,9 +680,7 @@ Return ONLY valid JSON matching this exact shape:
       "definition": "A Collins COBUILD style full-sentence definition. Write it as a complete sentence that shows the expression in use, e.g. 'If you put off doing something, you delay doing it.' Use vocabulary a ${level} learner can understand.",
       "synonyms": ["3 to 5 synonyms or near-synonyms, English only, Longman thesaurus style"],
       "examples": ["basic example sentence 1", "basic example sentence 2"],
-      "applied_examples": ["a practical sentence a learner could adapt to daily life 1", "another practical, personal-context sentence 2"],
-      "image_prompt": "a vivid, concrete scene description (in English) for an illustration that visually depicts the meaning of this expression, friendly flat illustration style, no text in image",
-      "image_caption": "one short English sentence using the expression that describes the illustrated scene"
+      "applied_examples": ["a practical sentence a learner could adapt to daily life 1", "another practical, personal-context sentence 2"]
     }
   ],
   "quiz": [
@@ -801,12 +773,6 @@ function renderExpressionCard(){
 
       <div class="divider"></div>
 
-      <div class="section-label">&#127912; Picture this</div>
-      <div class="img-box" id="imgBox"></div>
-      <div class="img-caption" id="imgCaption"></div>
-
-      <div class="divider"></div>
-
       <div class="section-label">Make it yours</div>
       <p class="faint" style="margin-bottom:8px">내 상황에 응용해 볼 수 있는 예문이에요.</p>
       ${(e.applied_examples||[]).map(ex=>`
@@ -827,43 +793,6 @@ function renderExpressionCard(){
       ${s.idx < 4 ? '다음 표현 &rarr;' : '복습 퀴즈 시작 &rarr;'}
     </button>
   </div>`;
-  loadCardImage(e);
-}
-
-async function loadCardImage(e){
-  const box = document.getElementById('imgBox');
-  const cap = document.getElementById('imgCaption');
-  if(!box) return;
-  if(state.imageCache[e.expression]){
-    box.innerHTML = `<img src="${state.imageCache[e.expression]}" alt="${esc(e.expression)}">`;
-    cap.textContent = e.image_caption || '';
-    return;
-  }
-  box.innerHTML = `<div class="spinner"></div><p class="faint">이미지를 생성하고 있어요…</p>`;
-  cap.textContent = '';
-  try {
-    const url = await geminiImage(
-      (e.image_prompt || ('An illustration of: ' + e.expression)) +
-      ' — bright friendly flat vector illustration, soft colors, no text or letters in the image.');
-    state.imageCache[e.expression] = url;
-    // user may have moved on; only render if still on the same card
-    const cur = state.session?.expressions[state.session.idx];
-    if(cur && cur.expression === e.expression && document.getElementById('imgBox')){
-      document.getElementById('imgBox').innerHTML = `<img src="${url}" alt="${esc(e.expression)}">`;
-      document.getElementById('imgCaption').textContent = e.image_caption || '';
-    }
-  } catch(err){
-    if(document.getElementById('imgBox') === box){
-      box.innerHTML = `
-        <p class="faint" style="padding:0 16px">이미지 생성 실패: ${esc(err.message)}</p>
-        <button class="btn btn-ghost btn-sm" onclick='retryImage()'>이미지 다시 생성</button>
-        <div style="height:14px"></div>`;
-    }
-  }
-}
-function retryImage(){
-  const e = state.session.expressions[state.session.idx];
-  loadCardImage(e);
 }
 
 async function requestFeedback(){
